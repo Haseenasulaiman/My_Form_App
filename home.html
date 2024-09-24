@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Student Information</h2>
+        <form form id="studentForm" action="https://script.google.com/a/macros/kongu.edu/s/AKfycbxw3cK_eZ7GEnI55juynEJWY3Bw-ZcIe7fBL4dZQ0IvifzV37Y50LckqrfKdAMLDlYhbQ/exec" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="roll">Roll Number:</label>
+            <input type="text" id="roll" name="roll" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        document.getElementById('studentForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+        
+            const formData = new FormData(event.target);
+            const response = await fetch('https://script.google.com/a/macros/kongu.edu/s/AKfycbxw3cK_eZ7GEnI55juynEJWY3Bw-ZcIe7fBL4dZQ0IvifzV37Y50LckqrfKdAMLDlYhbQ/exec', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' // Bypass CORS restrictions
+            });
+        
+            const result = await response.text();
+            alert(result); // Show the result from the server
+        });
+        </script>
+</body>
+</html>
